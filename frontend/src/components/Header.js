@@ -1,5 +1,6 @@
+import "./Header.css";
 const Header = () => {
-  return <header></header>;
+  return <></>;
 };
 
 export default Header;
