@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CitiesCarousel from "../components/CitiesCarousel";
 import Header from "../components/Header";
+import Hero from "../components/Hero";
 
 export default class Home extends Component {
   render() {
@@ -74,7 +75,8 @@ export default class Home extends Component {
     ];
     return (
       <div className="contenidoHome">
-        <Header />
+        {/* <Header /> */}
+        <Hero />
         <CitiesCarousel carouselItems={carouselItems} />
       </div>
     );

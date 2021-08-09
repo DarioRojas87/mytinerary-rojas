@@ -1,4 +1,59 @@
+import Carousel from "react-bootstrap/Carousel";
+import { NavLink } from "react-router-dom";
+
 const Hero = () => {
-  return <></>;
+  return (
+    <>
+      <div className="hero">
+        <Carousel className="slider" fade>
+          <Carousel.Item interval={3000}>
+            <div className="caption1">
+              <video
+                src="https://assets.mixkit.co/videos/preview/mixkit-young-man-walking-listening-to-music-from-his-headphones-4855-large.mp4"
+                autoPlay
+                loop
+                muted
+              />
+            </div>
+          </Carousel.Item>
+          <Carousel.Item interval={3000}>
+            <div className="caption2">
+              <video
+                src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-hot-air-balloon-over-turkish-landscape-12977-large.mp4"
+                autoPlay
+                loop
+                muted
+              />
+            </div>
+          </Carousel.Item>
+          <Carousel.Item interval={3000}>
+            <div className="caption3">
+              <video
+                src="https://assets.mixkit.co/videos/preview/mixkit-honeymoon-of-a-couple-looking-on-a-map-4651-large.mp4"
+                autoPlay
+                loop
+                muted
+              />
+            </div>
+          </Carousel.Item>
+        </Carousel>
+        <div className="covertext">
+          <img src="./assets/img/logo1.png" />
+          <h1 className="title">MyTinerary</h1>
+          <div>
+            <h3 className="subtitle">
+              Find your perfect trip, designed by insiders who know and love
+              their cities!
+            </h3>
+            <NavLink className="navLink" exact to="/cities">
+              <button className="btnHome">
+                <span>START YOUR ADVENTURE!</span>
+              </button>
+            </NavLink>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 export default Hero;

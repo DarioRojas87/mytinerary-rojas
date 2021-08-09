@@ -293,3 +293,59 @@ img.logo {
   background-size: cover;
   background-position: center;
 }
+
+/*HERO COMPONENT*/
+
+div.hero {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+}
+div.hero .carousel-control-next-icon {
+  display: none !important;
+}
+div.hero .carousel-control-prev-icon {
+  display: none !important;
+}
+div.hero .carousel-indicators {
+  display: none !important;
+}
+
+.caption1,
+.caption2,
+.caption3 {
+  width: 100%;
+  height: 100vh;
+}
+
+.caption1 {
+  background-color: brown;
+}
+.caption2 {
+  background-color: burlywood;
+}
+.caption3 {
+  background-color: chartreuse;
+}
+
+.covertext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* To make the div to be place anywhere. It is out of the document flow */
+  top: 170px; /* The distance between the div with the top of document */
+  left: 0px; /* Make the div full width */
+  right: 0px; /* Make the div full width */
+  z-index: 10;
+}
+
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
