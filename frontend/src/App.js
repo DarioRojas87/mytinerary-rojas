@@ -1,8 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
-import CitiesCarousel from "./components/CitiesCarousel";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Navbar1 from "./components/Navbar";
 import Home from "./pages/Home";
 import Cities from "./pages/Cities";
