@@ -38,8 +38,14 @@ const Hero = () => {
           </Carousel.Item>
         </Carousel>
         <div className="covertext">
-          <img src="./assets/img/logo1.png" alt="MyTinerary Logo" />
-          <h1 className="title">MyTinerary</h1>
+          <img
+            className="animate__animated animate__fadeInDownBig"
+            src="./assets/img/logo1.png"
+            alt="MyTinerary Logo"
+          />
+          <h1 className="title animate__animated animate__fadeInUp animate__delay-1s">
+            MyTinerary
+          </h1>
           <div>
             <h3 className="subtitle">
               Find your perfect trip, designed by insiders who know and love
