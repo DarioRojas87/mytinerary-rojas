@@ -1,0 +1,23 @@
+{
+  "name": "mytinerary-rojas",
+  "version": "1.0.0",
+  "description": "servidor de mytinerary",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarioRojas87/mytinerary-rojas.git"
+  },
+  "author": "Dario Rojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarioRojas87/mytinerary-rojas/issues"
+  },
+  "homepage": "https://github.com/DarioRojas87/mytinerary-rojas#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

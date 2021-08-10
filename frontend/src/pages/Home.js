@@ -8,8 +8,8 @@ export default class Home extends Component {
       [
         {
           id: "1",
-          name: "brugges.jpg",
-          title: "Brugges - Belgium",
+          name: "bruges.jpg",
+          title: "Bruges - Belgium",
         },
         {
           id: "2",
