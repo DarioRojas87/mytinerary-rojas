@@ -1,14 +1,14 @@
 const express = require("express");
-const cros = require("cors");
+const cors = require("cors");
 require("dotenv").config();
+const router = require("./routes/index");
 
 const app = express();
 
 //Middleware
 app.use(cors());
+app.use(express.json());
 
-app.get("/test/data", (req, res) => {
-  res.json({ respuesta: "hola" });
-});
+app.use("/api", router);
 
 app.listen(4000, () => console.log("Server up and running on port 4000"));
