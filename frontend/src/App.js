@@ -5,6 +5,7 @@ import Navbar1 from "./components/Navbar";
 import Home from "./pages/Home";
 import Cities from "./pages/Cities";
 import NotFound404 from "./pages/NotFound404";
+import City from "./pages/City";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/cities" component={Cities} />
+          <Route path="/city/:id" component={City} />
           <Route path="/notFound" component={NotFound404} />
           <Redirect to="/notFound" />
         </Switch>
