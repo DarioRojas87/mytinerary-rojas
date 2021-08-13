@@ -14,7 +14,7 @@ const Navbar1 = () => {
       <Navbar.Brand className="py-0 ">
         <div className="brand">
           <img
-            src="./assets/img/logo.png"
+            src="/assets/img/logo.png"
             className="d-inline-block align-top logo"
             alt="MyTinerary Logo"
           ></img>

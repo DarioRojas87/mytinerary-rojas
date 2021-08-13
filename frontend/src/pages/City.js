@@ -17,9 +17,12 @@ const City = (props) => {
       <h1>{city.title}</h1>
       <h2>{city.subtitle}</h2>
       <img
-        alt="una imagen de la ciudad"
-        src={`"public/assets/img/${city.name}"`}
-      ></img>
+        style={{
+          width: 500,
+        }}
+        src={`/assets/img/${city.name}`}
+        alt=""
+      />
       <Link to="/cities">VOLVER A CITIES</Link>
       {console.log(city.name)}
       {/* <div
