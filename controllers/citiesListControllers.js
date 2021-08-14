@@ -91,7 +91,7 @@ const citiesListControllers = {
     cityToUpload
       .save()
       .then(() => res.json({ succes: true }))
-      .catch((err) => res.json({ succes: false, error: err }));
+      .catch((err) => res.json({ success: false, error: err }));
   },
   getCity: (req, res) => {
     //pido al modelo que busque en la BD la ciudad puntual que me esta pidiendo el front ( a traves del id)
@@ -103,13 +103,13 @@ const citiesListControllers = {
   deleteCity: (req, res) => {
     //le pido al modelo que borre de la DB la city que le estoy pidiendo
     City.findOneAndDelete({ _id: req.params.id }).then(() =>
-      res.json({ succes: true })
+      res.json({ success: true })
     );
   },
   modifyCity: (req, res) => {
     //le pido al modelo que busque una city para poder modificarla con los datos que le estoy enviando
     City.findOneAndUpdate({ _id: req.params.id }, { ...req.body }).then(() =>
-      res.json({ succes: true })
+      res.json({ success: true })
     );
   },
 };

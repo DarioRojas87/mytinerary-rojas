@@ -4,81 +4,6 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 
-// const cities = [
-//   {
-//     id: "1",
-//     name: "bruges.jpg",
-//     title: "Bruges",
-//     subtitle: "BELGIUM",
-//   },
-//   {
-//     id: "2",
-//     name: "paris.jpg",
-//     title: "Paris",
-//     subtitle: "FRANCE",
-//   },
-//   {
-//     id: "3",
-//     name: "london.jpg",
-//     title: "London",
-//     subtitle: "ENGLAND",
-//   },
-//   {
-//     id: "4",
-//     name: "barcelona.jpg",
-//     title: "Barcelona",
-//     subtitle: "SPAIN",
-//   },
-//   {
-//     id: "5",
-//     name: "beijing.jpg",
-//     title: "Beijing",
-//     subtitle: "CHINA",
-//   },
-//   {
-//     id: "6",
-//     name: "cairo.jpg",
-//     title: "Cairo",
-//     subtitle: "EGYPT",
-//   },
-//   {
-//     id: "7",
-//     name: "casablanca.jpg",
-//     title: "Casablanca",
-//     subtitle: "MOROCCO",
-//   },
-//   {
-//     id: "8",
-//     name: "tokyo.jpg",
-//     title: "Tokyo",
-//     subtitle: "JAPAN",
-//   },
-//   {
-//     id: "9",
-//     name: "buenosAires.jpg",
-//     title: "Buenos Aires",
-//     subtitle: "ARGENTINA",
-//   },
-//   {
-//     id: "10",
-//     name: "cartagena.jpg",
-//     title: "Cartagena",
-//     subtitle: "COLOMBIA",
-//   },
-//   {
-//     id: "11",
-//     name: "newYork.jpg",
-//     title: "New York",
-//     subtitle: "UNITED STATES",
-//   },
-//   {
-//     id: "12",
-//     name: "laHabana.jpg",
-//     title: "La Habana",
-//     subtitle: "CUBA",
-//   },
-// ];
-
 const Cities = () => {
   const [cities, setCities] = useState([]);
   const [searchCities, setSearchCities] = useState("");
@@ -96,6 +21,15 @@ const Cities = () => {
     setSearchCities(e.target.value);
   };
 
+  // let filteredCities1 = (searchCities) => {
+  //   cities.filter((cities) => {
+  //     searchCities === ""
+  //       ? cities
+  //       : cities.title
+  //           .toLowerCase()
+  //           .startsWith(searchCities.toLowerCase().trim());
+  //   });
+  // };
   if (loading) {
     return <Loader />;
   }
@@ -126,36 +60,30 @@ const Cities = () => {
                       .toLowerCase()
                       .startsWith(searchCities.toLowerCase().trim());
               return citiesFiltered;
-              // if (searchCities === "") {
-              //   return cities;
-              // } else if (
-              //   cities.title
-              //     .toLowerCase()
-              //     .startsWith(searchCities.toLowerCase().trim())
-              // ) {
-              //   return cities;
-              // }
             })
             .map((city, index) => {
               return (
-                <Link key={index} to={`/city/${city._id}`}>
-                  <figure className="cities-grid effect-move">
-                    <img
-                      className="cities-grid-image effect-image"
-                      src={`/assets/img/${city.name}`}
-                      alt=""
-                    />
-                    <figcaption className="cities-grid-content">
-                      <span className="cities-tag effect-target">CITY</span>
-                      <h2 className="cities-grid-title effect-target">
-                        {city.title}
-                      </h2>
-                      <p className="cities-grid-text effect-target effect-text">
-                        {city.subtitle}
-                      </p>
-                    </figcaption>
-                  </figure>
-                </Link>
+                <figure className="cities-grid effect-move">
+                  <Link
+                    className="cityLink"
+                    key={index}
+                    to={`/city/${city._id}`}
+                  ></Link>
+                  <img
+                    className="cities-grid-image effect-image"
+                    src={`/assets/img/${city.name}`}
+                    alt=""
+                  />
+                  <figcaption className="cities-grid-content">
+                    <span className="cities-tag effect-target">CITY</span>
+                    <h2 className="cities-grid-title effect-target">
+                      {city.title}
+                    </h2>
+                    <p className="cities-grid-text effect-target effect-text">
+                      {city.subtitle}
+                    </p>
+                  </figcaption>
+                </figure>
               );
             })}
         </div>

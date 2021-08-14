@@ -17,7 +17,7 @@ h4 {
 div.contenedor {
   width: 100%;
   min-height: 100vh;
-  background-image: url("https://wallpaper.dog/large/5568071.jpg");
+  background-color: #161748;
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -188,7 +188,7 @@ img.logo {
   width: 80vw;
   margin-top: 10vh;
   margin-bottom: 2vh;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(132, 88, 179, 0.7);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(11px);
   -webkit-backdrop-filter: blur(11px);
@@ -321,7 +321,12 @@ div.citiesContent {
   min-width: 350px;
   max-height: 300px;
 }
-
+.cities-grid a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 .cities-grid-image {
   position: relative;
   display: block;
