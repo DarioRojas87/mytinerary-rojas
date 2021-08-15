@@ -16,6 +16,7 @@ const City = (props) => {
       {console.log(city)}
       <h1>{city.title}</h1>
       <h2>{city.subtitle}</h2>
+      <h3 style={{ fontSize: 60 }}>UNDER CONSTRUCTION</h3>
       <img
         style={{
           width: 500,
@@ -23,13 +24,8 @@ const City = (props) => {
         src={`/assets/img/${city.name}`}
         alt=""
       />
-      <Link to="/cities">VOLVER A CITIES</Link>
+      <Link to="/cities">Go Back to Cities</Link>
       {console.log(city.name)}
-      {/* <div
-        style={{
-          backgroundImage: `url("public/assets/img/${city.name}")`,
-        }}
-      ></div> */}
     </div>
   );
 };

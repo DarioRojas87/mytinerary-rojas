@@ -5,7 +5,7 @@ const CitiesCarousel = ({ carouselItems }) => {
   return (
     <div className="carouselCities">
       <h1 className="py-5 carouselTitle">Popular MyTineraries</h1>
-      <Carousel>
+      <Carousel fade>
         {carouselItems.map((cities, index) => {
           return (
             <Carousel.Item key={index}>

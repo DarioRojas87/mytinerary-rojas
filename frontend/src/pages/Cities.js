@@ -8,12 +8,13 @@ const Cities = () => {
   const [cities, setCities] = useState([]);
   const [searchCities, setSearchCities] = useState("");
   const [loading, setLoading] = useState(true);
+  //const [citiesFiltered, setCitiesFiltered] = useState(cities);
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/cities").then((response) => {
       setCities(response.data.response);
       setLoading(false);
-      console.log(response.data.response);
+      // console.log(response.data.response);
     });
   }, []);
 
@@ -21,15 +22,9 @@ const Cities = () => {
     setSearchCities(e.target.value);
   };
 
-  // let filteredCities1 = (searchCities) => {
-  //   cities.filter((cities) => {
-  //     searchCities === ""
-  //       ? cities
-  //       : cities.title
-  //           .toLowerCase()
-  //           .startsWith(searchCities.toLowerCase().trim());
-  //   });
-  // };
+  console.log(searchCities);
+  console.log(cities);
+
   if (loading) {
     return <Loader />;
   }
@@ -62,13 +57,11 @@ const Cities = () => {
               return citiesFiltered;
             })
             .map((city, index) => {
+              console.log(city);
+
               return (
-                <figure className="cities-grid effect-move">
-                  <Link
-                    className="cityLink"
-                    key={index}
-                    to={`/city/${city._id}`}
-                  ></Link>
+                <figure key={index} className="cities-grid effect-move">
+                  <Link className="cityLink" to={`/city/${city._id}`}></Link>
                   <img
                     className="cities-grid-image effect-image"
                     src={`/assets/img/${city.name}`}
