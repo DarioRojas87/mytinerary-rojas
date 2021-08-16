@@ -6,24 +6,30 @@ import Loader from "../components/Loader";
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
-  const [searchCities, setSearchCities] = useState("");
+  const [searchCities, setSearchCities] = useState([]);
   const [loading, setLoading] = useState(true);
-  //const [citiesFiltered, setCitiesFiltered] = useState(cities);
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/cities").then((response) => {
       setCities(response.data.response);
+      setSearchCities(response.data.response);
       setLoading(false);
-      // console.log(response.data.response);
     });
   }, []);
 
   const searchHandler = (e) => {
-    setSearchCities(e.target.value);
+    setSearchCities(
+      cities.filter((city) => {
+        return searchCities === ""
+          ? city
+          : city.title
+              .toLowerCase()
+              .startsWith(e.target.value.toLowerCase().trim());
+      })
+    );
   };
-
-  console.log(searchCities);
   console.log(cities);
+  console.log(searchCities);
 
   if (loading) {
     return <Loader />;
@@ -46,19 +52,8 @@ const Cities = () => {
           </form>
         </div>
         <div className="containerCities">
-          {cities
-            .filter((cities) => {
-              let citiesFiltered =
-                searchCities === ""
-                  ? cities
-                  : cities.title
-                      .toLowerCase()
-                      .startsWith(searchCities.toLowerCase().trim());
-              return citiesFiltered;
-            })
-            .map((city, index) => {
-              console.log(city);
-
+          {searchCities.length > 0 ? (
+            searchCities.map((city, index) => {
               return (
                 <figure key={index} className="cities-grid effect-move">
                   <Link className="cityLink" to={`/city/${city._id}`}></Link>
@@ -78,7 +73,10 @@ const Cities = () => {
                   </figcaption>
                 </figure>
               );
-            })}
+            })
+          ) : (
+            <h1>NO HAY RESULTADOS</h1>
+          )}
         </div>
       </div>
     </>
