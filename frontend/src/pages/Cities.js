@@ -10,11 +10,24 @@ const Cities = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/cities").then((response) => {
-      setCities(response.data.response);
-      setSearchCities(response.data.response);
-      setLoading(false);
-    });
+    axios
+      .get("http://localhost:4000/api/cities")
+      .then((response) => {
+        if (response.data.success) {
+          console.log("el backend funciona y envia una respuesta");
+          setCities(response.data.response);
+          setSearchCities(response.data.response);
+        } else {
+          throw new Error("algo pasó");
+          // alert(
+          //   "el backend envia una respuesta pero algo falló en la base de datos"
+          // );
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const searchHandler = (e) => {
@@ -75,7 +88,13 @@ const Cities = () => {
               );
             })
           ) : (
-            <h1>NO HAY RESULTADOS</h1>
+            <h1
+              style={{
+                textAlign: "center",
+              }}
+            >
+              No results were found for your search, please try another city!
+            </h1>
           )}
         </div>
       </div>
