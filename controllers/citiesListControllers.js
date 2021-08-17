@@ -5,7 +5,14 @@ const citiesListControllers = {
   getCities: (req, res) => {
     console.log("Fetcheo ciudades desde base de datos");
     City.find()
-      .then((cities) => res.json({ success: true, response: cities }))
+      .then((cities) => {
+        if (cities.length > 0) {
+          console.log("entra al if");
+          res.json({ success: true, response: cities });
+        } else {
+          throw new Error();
+        }
+      })
       .catch((error) => res.json({ success: false, response: error }));
   },
   uploadNewCity: (req, res) => {
@@ -22,22 +29,35 @@ const citiesListControllers = {
   },
   getCity: (req, res) => {
     //pido al modelo que busque en la BD la ciudad puntual que me esta pidiendo el front ( a traves del id)
-    console.log("Obtengo una unica ciudad");
-    City.findOne({ _id: req.params.id }).then((city) =>
-      res.json({ response: city })
-    );
+
+    City.findOne({ _id: req.params.id })
+      .then((city) => {
+        if (city) {
+          console.log("Obtengo una unica ciudad");
+          res.json({ success: true, response: city });
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((error) => {
+        res.json({ succes: false, response: error.message });
+      });
   },
   deleteCity: (req, res) => {
     //le pido al modelo que borre de la DB la city que le estoy pidiendo
-    City.findOneAndDelete({ _id: req.params.id }).then(() =>
-      res.json({ success: true })
-    );
+    City.findOneAndDelete({ _id: req.params.id })
+      .then(() => res.json({ success: true }))
+      .catch((err) => {
+        res.json({ succes: false, response: err.message });
+      });
   },
   modifyCity: (req, res) => {
     //le pido al modelo que busque una city para poder modificarla con los datos que le estoy enviando
-    City.findOneAndUpdate({ _id: req.params.id }, { ...req.body }).then(() =>
-      res.json({ success: true })
-    );
+    City.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
+      .then(() => res.json({ success: true }))
+      .catch((err) => {
+        res.json({ succes: false, response: err.message });
+      });
   },
 };
 module.exports = citiesListControllers;

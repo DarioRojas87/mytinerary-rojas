@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Cities = () => {
+const Cities = (props) => {
   const [cities, setCities] = useState([]);
   const [searchCities, setSearchCities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,16 +20,28 @@ const Cities = () => {
           setCities(response.data.response);
           setSearchCities(response.data.response);
         } else {
-          throw new Error("algo pasó");
-          // alert(
-          //   "el backend envia una respuesta pero algo falló en la base de datos"
-          // );
+          throw new Error();
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        toast.error("Something went wrong! Redirecting to Home", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          props.history.push("/");
+        }, 5000);
+        return () => clearTimeout;
+      })
       .finally(() => {
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchHandler = (e) => {
@@ -98,6 +112,7 @@ const Cities = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
