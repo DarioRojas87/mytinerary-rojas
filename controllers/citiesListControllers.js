@@ -25,7 +25,7 @@ const citiesListControllers = {
     cityToUpload
       .save()
       .then(() => res.json({ succes: true }))
-      .catch((err) => res.json({ success: false, error: err }));
+      .catch((err) => res.json({ success: false, response: err }));
   },
   getCity: (req, res) => {
     //pido al modelo que busque en la BD la ciudad puntual que me esta pidiendo el front ( a traves del id)
