@@ -55,15 +55,18 @@ const Cities = (props) => {
       })
     );
   };
-  console.log(cities);
-  console.log(searchCities);
+  const headerContent = {
+    background: "headerBackground.jpg",
+    title: "CITIES",
+    subtitle: "MyTinerary",
+  };
 
   if (loading) {
     return <Loader />;
   }
   return (
     <>
-      <Header />
+      <Header headerContent={headerContent} />
       <div className="citiesContent">
         <div className="searchBar">
           <form className="searchform group">

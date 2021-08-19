@@ -1,11 +1,16 @@
-const Header = () => {
+const Header = (props) => {
   return (
-    <div className="header">
+    <div
+      className="header"
+      style={{
+        backgroundImage: `url("/assets/img/${props.headerContent.background}")`,
+      }}
+    >
       <span className="animate__animated animate__fadeInDownBig">
-        MyTinerary
+        {props.headerContent.subtitle}
       </span>
       <h1 className=" animate__animated animate__fadeInUp animate__delay-1s">
-        CITIES
+        {props.headerContent.title}
       </h1>
 
       <div className="mouse">
