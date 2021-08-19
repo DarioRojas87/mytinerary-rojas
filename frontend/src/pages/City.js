@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
+import Itinerary from "../components/Itinerary";
 
 const City = (props) => {
   const [city, setCity] = useState({});
+  const [itineraries, setItineraries] = useState([]);
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/city/${props.match.params.id}`)
@@ -36,22 +38,42 @@ const City = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/itineraries")
+      .then((res) => {
+        if (res.data.success) {
+          setItineraries(res.data.response);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        toast.error("Something went wrong! Redirecting to Cities", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          props.history.push("/cities");
+        }, 5000);
+        return () => clearTimeout;
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(itineraries);
   return (
     <>
+      <Header city={city} />
       <div className="contentCity">
-        {console.log(city)}
-        <h1>{city.title}</h1>
-        <h2>{city.subtitle}</h2>
-        <h3 style={{ fontSize: 60 }}>UNDER CONSTRUCTION</h3>
-        <img
-          style={{
-            width: 500,
-          }}
-          src={`/assets/img/${city.name}`}
-          alt=""
-        />
+        <Itinerary />
+
         <Link to="/cities">Go Back to Cities</Link>
-        {console.log(city.name)}
+
         <ToastContainer />
       </div>
     </>

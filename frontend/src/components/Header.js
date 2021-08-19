@@ -2,15 +2,18 @@ const Header = (props) => {
   return (
     <div
       className="header"
+      // style={{
+      //   backgroundImage: `url("/assets/img/${props.headerContent.background}")`,
+      // }}
       style={{
-        backgroundImage: `url("/assets/img/${props.headerContent.background}")`,
+        backgroundImage: `url("https://cdn.wallpapersafari.com/84/17/Z8C7mb.jpg")`,
       }}
     >
       <span className="animate__animated animate__fadeInDownBig">
-        {props.headerContent.subtitle}
+        {props.city.subtitle}
       </span>
       <h1 className=" animate__animated animate__fadeInUp animate__delay-1s">
-        {props.headerContent.title}
+        {props.city.title}
       </h1>
 
       <div className="mouse">

@@ -558,9 +558,10 @@ video {
 .header {
   position: relative;
   background: url(https://free4kwallpapers.com/uploads/originals/2020/02/03/maldives-beach-wallpaper.jpg)
-    /*BACKGROUND HEADER BY DEFECT*/ no-repeat center center fixed;
+    no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
+
   background-size: cover;
   background-position-y: -200px, center;
   text-align: center;
@@ -728,5 +729,88 @@ video {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+/*ITINERARY STYLES*/
+.card-box-container {
+  width: 70%;
+  min-height: 420px;
+  height: auto;
+  background: rgba(132, 88, 179, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-box {
+  width: 100%;
+  min-height: 420px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+.card-box-bg-img {
+  height: auto;
+  width: 20%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-box-img-desk {
+  margin-top: 20px;
+  margin-right: 70px;
+  margin-bottom: 20px;
+  width: 400px;
+  height: 300px;
+}
+
+.card-box-text-itinerary {
+  width: 70%;
+  margin-top: 30px;
+}
+.itinerary-title {
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 700;
+  text-align: start;
+  margin-bottom: 30px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.circle {
+  background: conic-gradient(from 220deg, #fd648e 0deg, #884cb2 90deg, #fd648e);
+  border-radius: 100%;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  border-radius: 100%;
+  border: 3px solid #fff;
+  background-image: url(https://media.istockphoto.com/photos/smiling-businesswoman-looking-at-camera-webcam-make-conference-call-picture-id1129638608?k=6&m=1129638608&s=612x612&w=0&h=8OhKQCq_elLsW_PAWA4n8pzQy3mlkf5a_ztp2Nbv8Y8=);
+  width: 120px;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+}
+
+.author {
+  display: flex;
   align-items: center;
 }

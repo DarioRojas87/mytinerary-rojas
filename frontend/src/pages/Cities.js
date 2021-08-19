@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,18 +55,29 @@ const Cities = (props) => {
       })
     );
   };
-  const headerContent = {
-    background: "headerBackground.jpg",
-    title: "CITIES",
-    subtitle: "MyTinerary",
-  };
 
   if (loading) {
     return <Loader />;
   }
   return (
     <>
-      <Header headerContent={headerContent} />
+      <div
+        className="header"
+        style={{
+          backgroundImage: `url("/assets/img/headerBackground.jpg")`,
+        }}
+      >
+        <span className="animate__animated animate__fadeInDownBig">
+          MyTinerary
+        </span>
+        <h1 className=" animate__animated animate__fadeInUp animate__delay-1s">
+          CITIES
+        </h1>
+
+        <div className="mouse">
+          <span></span>
+        </div>
+      </div>
       <div className="citiesContent">
         <div className="searchBar">
           <form className="searchform group">
