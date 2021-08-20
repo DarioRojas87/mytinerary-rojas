@@ -23,7 +23,7 @@ const itinerariesControllers = {
       duration: req.body.duration,
       likes: req.body.likes,
       hashtags: req.body.hashtags,
-      photo: req.body.photos,
+      cardPhoto: req.body.cardPhoto,
       comments: req.body.comments,
     });
     itineraryToUpload

@@ -725,15 +725,17 @@ video {
 
 .contentCity {
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20vh;
 }
 
 /*ITINERARY STYLES*/
 .card-box-container {
+  margin-top: 5vh;
   width: 70%;
   min-height: 420px;
   height: auto;
@@ -751,7 +753,7 @@ video {
 }
 .card-box {
   width: 100%;
-  min-height: 420px;
+  height: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
@@ -774,7 +776,10 @@ video {
 }
 
 .card-box-text-itinerary {
+  display: flex;
+  flex-direction: column;
   width: 70%;
+  height: 100%;
   margin-top: 30px;
 }
 .itinerary-title {
@@ -790,27 +795,24 @@ video {
   align-items: center;
 }
 
-.circle {
-  background: conic-gradient(from 220deg, #fd648e 0deg, #884cb2 90deg, #fd648e);
-  border-radius: 100%;
-  width: 160px;
-  height: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image {
-  border-radius: 100%;
-  border: 3px solid #fff;
-  background-image: url(https://media.istockphoto.com/photos/smiling-businesswoman-looking-at-camera-webcam-make-conference-call-picture-id1129638608?k=6&m=1129638608&s=612x612&w=0&h=8OhKQCq_elLsW_PAWA4n8pzQy3mlkf5a_ztp2Nbv8Y8=);
-  width: 120px;
-  height: 120px;
-  background-size: cover;
-  background-position: center;
-}
-
 .author {
   display: flex;
   align-items: center;
+}
+.image {
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
+  border-color: #363635;
+  border-width: 2px;
+  border-style: solid;
+  filter: grayscale(100%);
+  transition-property: all;
+  transition-duration: 800ms;
+}
+.image:hover {
+  filter: grayscale(0%);
+}
+.hashtags p {
+  margin-bottom: 0;
 }

@@ -65,12 +65,14 @@ const City = (props) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(itineraries);
+
   return (
     <>
       <Header city={city} />
       <div className="contentCity">
-        <Itinerary />
+        {itineraries.map((itinerary, index) => {
+          return <Itinerary key={index} itinerary={itinerary} />;
+        })}
 
         <Link to="/cities">Go Back to Cities</Link>
 
