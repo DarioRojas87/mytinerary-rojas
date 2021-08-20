@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { connect } from "react-redux";
 
 const Cities = (props) => {
   const [cities, setCities] = useState([]);
   const [searchCities, setSearchCities] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  console.log(props.citiesList);
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/cities")
@@ -131,4 +131,10 @@ const Cities = (props) => {
   );
 };
 
-export default Cities;
+const mapStateToProps = (state) => {
+  return {
+    citiesList: state.cities.citiesList,
+  };
+};
+
+export default connect(mapStateToProps)(Cities);

@@ -20,6 +20,7 @@ const Itinerary = (props) => {
           <h3>{props.itinerary.description}</h3>
           <div className="author">
             <img
+              alt="Author"
               className="image"
               src={`/assets/img/${props.itinerary.author.photo}`}
             />
@@ -36,7 +37,7 @@ const Itinerary = (props) => {
               {props.itinerary.price}
             </span>
             <span className="time">
-              <i class="fal fa-clock"></i>
+              <i className="fal fa-clock"></i>
               {props.itinerary.duration}hs
             </span>
           </div>
