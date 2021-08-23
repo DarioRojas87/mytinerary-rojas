@@ -2,11 +2,8 @@ const Header = (props) => {
   return (
     <div
       className="header"
-      // style={{
-      //   backgroundImage: `url("/assets/img/${props.headerContent.background}")`,
-      // }}
       style={{
-        backgroundImage: `url("https://cdn.wallpapersafari.com/84/17/Z8C7mb.jpg")`,
+        backgroundImage: `url("/assets/img/${props.city.name}")`,
       }}
     >
       <span className="animate__animated animate__fadeInDownBig">

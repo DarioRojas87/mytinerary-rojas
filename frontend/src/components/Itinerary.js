@@ -1,9 +1,24 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+// import { Button } from "react-bootstrap";
+// import Modal from "react-bootstrap/Modal";
+import { Collapse, Button, CardBody, Card } from "reactstrap";
 
 const Itinerary = (props) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
+  const [collapse, setCollapse] = useState(false);
+  const [status, setStatus] = useState("View More");
+
+  const onEntering = () => setStatus("Opening...");
+
+  const onEntered = () => setStatus("View Less");
+
+  const onExiting = () => setStatus("Closing...");
+
+  const onExited = () => setStatus("View More");
+
+  const toggle = () => setCollapse(!collapse);
+
+  let priceArray = [1, 2, 3, 4, 5];
 
   return (
     <div className="card-box-container">
@@ -11,7 +26,7 @@ const Itinerary = (props) => {
         <div className="card-box-bg-img">
           <img
             className="card-box-img-desk"
-            src={`/assets/img/exploreBruges.jpg`}
+            src={`/assets/img/${props.itinerary.cardPhoto}`}
             alt="placeholder"
           />
         </div>
@@ -34,14 +49,40 @@ const Itinerary = (props) => {
             </span>
             <span className="price">
               Price:
-              {props.itinerary.price}
+              {priceArray.slice(0, props.itinerary.price).map((index) => {
+                return <i key={index} className="fad fa-money-bill-wave"></i>;
+              })}
             </span>
             <span className="time">
               <i className="fal fa-clock"></i>
               {props.itinerary.duration}hs
             </span>
+            <span>
+              <i className="fal fa-heart"></i>
+            </span>
           </div>
-          <Button variant="primary" onClick={() => setShow(true)}>
+          <Button
+            color="primary"
+            onClick={toggle}
+            style={{ marginBottom: "1rem" }}
+          >
+            {status}
+          </Button>
+
+          <Collapse
+            isOpen={collapse}
+            onEntering={onEntering}
+            onEntered={onEntered}
+            onExiting={onExiting}
+            onExited={onExited}
+          >
+            <Card>
+              <CardBody className="itineraryBody">
+                <h2>UNDER CONSTRUCTION</h2>
+              </CardBody>
+            </Card>
+          </Collapse>
+          {/* <Button variant="primary" onClick={() => setShow(true)}>
             View More
           </Button>
 
@@ -59,7 +100,7 @@ const Itinerary = (props) => {
             <Modal.Body>
               <h1>UNDER CONSTRUCTION</h1>
             </Modal.Body>
-          </Modal>
+          </Modal> */}
         </div>
       </div>
     </div>

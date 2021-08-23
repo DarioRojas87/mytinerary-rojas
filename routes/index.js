@@ -1,4 +1,5 @@
 const express = require("express");
+const { get } = require("mongoose");
 const router = express.Router();
 const citiesListControllers = require("../controllers/citiesListControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
@@ -18,4 +19,15 @@ router
   .route("/itineraries")
   .get(itinerariesControllers.getItineraries)
   .post(itinerariesControllers.uploadNewItinerary);
+
+router
+  .route("/itineraries/:city")
+  .get(itinerariesControllers.getItinerariesByCity);
+
+router
+  .route("/itinerary/:id")
+  .get(itinerariesControllers.getItineraryById)
+  .put(itinerariesControllers.modifyItinerary)
+  .delete(itinerariesControllers.deleteItinerary);
+
 module.exports = router;

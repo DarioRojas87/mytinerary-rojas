@@ -585,6 +585,7 @@ video {
   border-bottom: 2px solid #e8f380;
   padding-bottom: 12px;
   line-height: 3;
+  -webkit-text-stroke: 1px black;
 }
 
 .mouse {
@@ -732,7 +733,12 @@ video {
   align-items: center;
   padding-bottom: 20vh;
 }
-
+.contentCity h1 {
+  text-align: center;
+}
+.noItinerariesImg {
+  width: 20%;
+}
 /*ITINERARY STYLES*/
 .card-box-container {
   margin-top: 5vh;
@@ -771,8 +777,8 @@ video {
   margin-top: 20px;
   margin-right: 70px;
   margin-bottom: 20px;
-  width: 400px;
-  height: 300px;
+  width: 20vw;
+  height: auto;
 }
 
 .card-box-text-itinerary {
@@ -793,6 +799,7 @@ video {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .author {
@@ -815,4 +822,19 @@ video {
 }
 .hashtags p {
   margin-bottom: 0;
+}
+.fa-money-bill-wave {
+  margin: 0 0.2vw;
+}
+
+.fa-clock {
+  margin-right: 0.2vw;
+}
+
+.fa-heart {
+  font-size: 30px;
+}
+
+.itineraryBody h2 {
+  color: black;
 }

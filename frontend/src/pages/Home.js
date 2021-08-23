@@ -3,6 +3,9 @@ import CitiesCarousel from "../components/CitiesCarousel";
 import Hero from "../components/Hero";
 
 export default class Home extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     const carouselItems = [
       [
@@ -67,8 +70,8 @@ export default class Home extends Component {
         },
         {
           id: "12",
-          name: "laHabana.jpg",
-          title: "La Habana - Cuba",
+          name: "havana.jpg",
+          title: "Havana - Cuba",
         },
       ],
     ];

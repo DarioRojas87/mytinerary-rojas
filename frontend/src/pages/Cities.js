@@ -1,29 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
+import citiesActions from "../redux/actions/citiesActions";
 
 const Cities = (props) => {
-  const [cities, setCities] = useState([]);
-  const [searchCities, setSearchCities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  console.log(props.citiesList);
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/cities")
-      .then((response) => {
-        if (response.data.success) {
-          console.log("el backend funciona y envia una respuesta");
-          setCities(response.data.response);
-          setSearchCities(response.data.response);
-        } else {
-          throw new Error();
-        }
-      })
-      .catch((err) => {
+    window.scrollTo(0, 0);
+    async function getCitiesList() {
+      let response = await props.getCitiesList();
+      if (response && response.error) {
         toast.error("Something went wrong! Redirecting to Home", {
           position: "top-right",
           autoClose: 5000,
@@ -32,32 +20,26 @@ const Cities = (props) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          onClose: () => props.history.push("/"),
         });
-        setTimeout(() => {
-          props.history.push("/");
-        }, 5000);
-        return () => clearTimeout;
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      }
+    }
+    getCitiesList();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchHandler = (e) => {
-    setSearchCities(
-      cities.filter((city) => {
-        return searchCities === ""
-          ? city
-          : city.title
-              .toLowerCase()
-              .startsWith(e.target.value.toLowerCase().trim());
-      })
-    );
+    props.filterCitiesList(e.target.value.toLowerCase().trim());
   };
 
-  if (loading) {
-    return <Loader />;
+  if (props.citiesList.length === 0) {
+    return (
+      <>
+        <Loader />
+        <ToastContainer />
+      </>
+    );
   }
   return (
     <>
@@ -93,8 +75,8 @@ const Cities = (props) => {
           </form>
         </div>
         <div className="containerCities">
-          {searchCities.length > 0 ? (
-            searchCities.map((city, index) => {
+          {props.filteredCitiesList.length > 0 ? (
+            props.filteredCitiesList.map((city, index) => {
               return (
                 <figure key={index} className="cities-grid effect-move">
                   <Link className="cityLink" to={`/city/${city._id}`}></Link>
@@ -134,7 +116,43 @@ const Cities = (props) => {
 const mapStateToProps = (state) => {
   return {
     citiesList: state.cities.citiesList,
+    filteredCitiesList: state.cities.filteredCitiesList,
   };
 };
 
-export default connect(mapStateToProps)(Cities);
+const mapDispatchToProps = {
+  getCitiesList: citiesActions.getList,
+  filterCitiesList: citiesActions.filterCities,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
+
+// axios
+//   .get("http://localhost:4000/api/cities")
+//   .then((response) => {
+//     if (response.data.success) {
+//       console.log("el backend funciona y envia una respuesta");
+//       setCities(response.data.response);
+//       setSearchCities(response.data.response);
+//     } else {
+//       throw new Error();
+//     }
+//   })
+//   .catch((err) => {
+//     toast.error("Something went wrong! Redirecting to Home", {
+//       position: "top-right",
+//       autoClose: 5000,
+//       hideProgressBar: false,
+//       closeOnClick: true,
+//       pauseOnHover: true,
+//       draggable: true,
+//       progress: undefined,
+//     });
+//     setTimeout(() => {
+//       props.history.push("/");
+//     }, 5000);
+//     return () => clearTimeout;
+//   })
+//   .finally(() => {
+//     setLoading(false);
+//   });
