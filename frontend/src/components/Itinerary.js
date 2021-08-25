@@ -61,13 +61,6 @@ const Itinerary = (props) => {
               <i className="fal fa-heart"></i>
             </span>
           </div>
-          <Button
-            color="primary"
-            onClick={toggle}
-            style={{ marginBottom: "1rem" }}
-          >
-            {status}
-          </Button>
 
           <Collapse
             isOpen={collapse}
@@ -82,6 +75,13 @@ const Itinerary = (props) => {
               </CardBody>
             </Card>
           </Collapse>
+          <Button
+            color="primary"
+            onClick={toggle}
+            style={{ marginBottom: "1rem" }}
+          >
+            {status}
+          </Button>
           {/* <Button variant="primary" onClick={() => setShow(true)}>
             View More
           </Button>

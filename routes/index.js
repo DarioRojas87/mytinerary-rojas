@@ -3,6 +3,7 @@ const { get } = require("mongoose");
 const router = express.Router();
 const citiesListControllers = require("../controllers/citiesListControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
+const userControllers = require("../controllers/userControllers");
 
 router
   .route("/cities")
@@ -29,5 +30,8 @@ router
   .get(itinerariesControllers.getItineraryById)
   .put(itinerariesControllers.modifyItinerary)
   .delete(itinerariesControllers.deleteItinerary);
+
+router.route("/user/signup").post(userControllers.newUser);
+router.route("/user/signin").post(userControllers.logUser);
 
 module.exports = router;

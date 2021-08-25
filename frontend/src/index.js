@@ -9,10 +9,8 @@ import thunk from "redux-thunk";
 const projectStore = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={projectStore}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={projectStore}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );

@@ -838,3 +838,122 @@ video {
 .itineraryBody h2 {
   color: black;
 }
+
+/*SIGN UP PAGE*/
+
+.login {
+  position: relative;
+  min-height: 560px;
+  width: 60%;
+  margin: auto;
+  padding: 60px 60px;
+  background: url(https://i.pinimg.com/originals/59/8b/2b/598b2b3aea791a9a8b6a5811981431da.jpg)
+    no-repeat center center #505050;
+  background-size: cover;
+  box-shadow: 0px 30px 60px -5px #000;
+}
+
+.login form {
+  padding-top: 80px;
+}
+
+.login .active {
+  border-bottom: 2px solid #1161ed;
+}
+
+.login h2 {
+  padding-left: 12px;
+  font-size: 22px;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  letter-spacing: 2px;
+  display: inline-block;
+  font-weight: 100;
+}
+
+.login h2:first-child {
+  padding-left: 0px;
+}
+
+.login span {
+  text-transform: uppercase;
+  font-size: 12px;
+
+  display: inline-block;
+  position: relative;
+  top: -65px;
+  transition: all 0.5s ease-in-out;
+}
+
+.login .text {
+  border: none;
+  width: 89%;
+  padding: 10px 20px;
+  display: block;
+  height: 15px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+  margin-top: 15px;
+  transition: all 0.5s ease-in-out;
+}
+
+.login .text:focus {
+  outline: 0;
+  border: 2px solid white;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.login .text:focus + span {
+  opacity: 1;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+.login input {
+  display: inline-block;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.login h2,
+.login span,
+.login .custom-checkbox {
+  margin-left: 20px;
+}
+
+.login label {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.login .signin {
+  background-color: rgba(132, 88, 179, 0.7);
+  color: #fff;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 39px;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: all 0.5s ease-in-out;
+  border: none;
+  text-transform: uppercase;
+}
+
+.login .signin:hover {
+  background: #d0bdf4;
+  box-shadow: 0px 4px 35px -5px #d0bdf4;
+  cursor: pointer;
+}
+
+.login .signin:focus {
+  outline: none;
+}

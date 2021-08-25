@@ -30,6 +30,12 @@ const Navbar1 = () => {
           <NavLink className="navLink" to="/cities">
             Cities
           </NavLink>
+          <NavLink className="navLink" to="/signin">
+            Sign In
+          </NavLink>
+          <NavLink className="navLink" to="/signup">
+            Sign Up
+          </NavLink>
         </Nav>
         <Nav>
           <NavLink className="navLink" to="/">

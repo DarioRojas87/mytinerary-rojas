@@ -126,33 +126,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
-
-// axios
-//   .get("http://localhost:4000/api/cities")
-//   .then((response) => {
-//     if (response.data.success) {
-//       console.log("el backend funciona y envia una respuesta");
-//       setCities(response.data.response);
-//       setSearchCities(response.data.response);
-//     } else {
-//       throw new Error();
-//     }
-//   })
-//   .catch((err) => {
-//     toast.error("Something went wrong! Redirecting to Home", {
-//       position: "top-right",
-//       autoClose: 5000,
-//       hideProgressBar: false,
-//       closeOnClick: true,
-//       pauseOnHover: true,
-//       draggable: true,
-//       progress: undefined,
-//     });
-//     setTimeout(() => {
-//       props.history.push("/");
-//     }, 5000);
-//     return () => clearTimeout;
-//   })
-//   .finally(() => {
-//     setLoading(false);
-//   });
