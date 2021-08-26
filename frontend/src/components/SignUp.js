@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { connect } from "react-redux";
+import userActions from "../redux/actions/userActions";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [newUser, setNewUser] = useState({
     name: "",
     lastName: "",
@@ -30,36 +32,12 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log(newUser);
-    axios
-      .post("http://localhost:4000/api/user/signup", newUser)
-      .then((res) => {
-        if (res.data.success) {
-          toast.success("Congratulations! now you have an user account", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        } else {
-          toast.error("There is another user with that mail. Try again!", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      })
-      .catch((e) => {
-        alert("Algo salio mal con el backend");
-      });
+  const handleSubmit = async () => {
+    let response = await props.signUp(newUser);
+    console.log(response);
+    // if (response.data.response) {
+    //LISTO PARA CATCHEAR ERRORES Y PARA DAR EL OK CON TOASTIFY
+    // }
   };
 
   return (
@@ -143,4 +121,37 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+  signUp: userActions.signUp,
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
+
+// axios
+//   .post("http://localhost:4000/api/user/signup", { ...newUser })
+//   .then((res) => {
+//     if (res.data.success) {
+//       toast.success("Congratulations! now you have an user account", {
+//         position: "top-center",
+//         autoClose: 3000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//       });
+//     } else {
+//       toast.error("There is another user with that mail. Try again!", {
+//         position: "top-center",
+//         autoClose: 3000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//       });
+//     }
+//   })
+//   .catch((e) => {
+//     alert("Algo salio mal con el backend");
+//   });

@@ -1,7 +1,9 @@
 import { Navbar, Nav } from "react-bootstrap";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-const Navbar1 = () => {
+const Navbar1 = (props) => {
+  console.log(props.user.isLoggedIn);
   return (
     <Navbar
       className="navbar-default"
@@ -36,6 +38,7 @@ const Navbar1 = () => {
           <NavLink className="navLink" to="/signup">
             Sign Up
           </NavLink>
+          <p>{props.isLoggedIn}</p>
         </Nav>
         <Nav>
           <NavLink className="navLink" to="/">
@@ -57,4 +60,10 @@ const Navbar1 = () => {
     </Navbar>
   );
 };
-export default Navbar1;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(Navbar1);
