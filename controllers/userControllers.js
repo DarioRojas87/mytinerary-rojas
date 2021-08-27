@@ -23,7 +23,15 @@ const userControllers = {
           newUser.save().then(() => {
             console.log("nuevo usuario creado");
             const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY);
-            res.json({ success: true, response: newUser, error: null });
+            res.json({
+              success: true,
+              response: {
+                name: newUser.name,
+                photoUrl: newUser.photoUrl,
+                token,
+              },
+              error: null,
+            });
           });
         }
       })
