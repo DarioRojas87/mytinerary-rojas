@@ -28,7 +28,7 @@ const Navbar1 = (props) => {
       </Navbar.Brand>
 
       <Nav>
-        {props.isLoggedIn ? (
+        {props.token ? (
           <div className="profilePicture">
             <img src={props.user.photoUrl} className="image--cover" />
             <p>{props.user.name}</p>
@@ -60,17 +60,17 @@ const Navbar1 = (props) => {
           <NavLink className="navLink" to="/cities">
             Cities
           </NavLink>
-          {!props.isLoggedIn && (
+          {!props.token && (
             <NavLink className="navLink" to="/signin">
               Sign In
             </NavLink>
           )}
-          {!props.isLoggedIn && (
+          {!props.token && (
             <NavLink className="navLink" to="/signup">
               Sign Up
             </NavLink>
           )}
-          {props.isLoggedIn && (
+          {props.token && (
             <p className="navLink signOut" onClick={() => props.signOut()}>
               Sign Out
             </p>
@@ -82,7 +82,7 @@ const Navbar1 = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.user.isLoggedIn,
+    token: state.user.token,
     user: state.user.user,
   };
 };

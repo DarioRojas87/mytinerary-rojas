@@ -51,7 +51,15 @@ const userControllers = {
         if (!passMatch) {
           throw new Error("Wrong Mail or/and Password, try again!");
         }
-        res.json({ success: true, response: user });
+        const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
+        res.json({
+          success: true,
+          response: {
+            name: user.name,
+            photoUrl: user.photoUrl,
+            token,
+          },
+        });
       })
       .catch((e) => {
         if (e.message.includes("Wrong")) {

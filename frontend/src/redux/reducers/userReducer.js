@@ -1,19 +1,19 @@
-const userReducer = (state = { isLoggedIn: false, user: {} }, action) => {
+const userReducer = (state = { token: null, user: {} }, action) => {
   switch (action.type) {
     case "SIGN_INTO_SYSTEM":
-      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
-        isLoggedIn: true,
+        token: action.payload.token,
         user: action.payload,
       };
     case "SIGN_OUT":
-      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("token");
       localStorage.removeItem("user");
       return {
         ...state,
-        isLoggedIn: false,
+        token: null,
         user: {},
       };
     default:

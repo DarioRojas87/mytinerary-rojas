@@ -14,7 +14,7 @@ import userActions from "./redux/actions/userActions";
 
 const App = (props) => {
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    if (localStorage.getItem("token")) {
       props.signInLocalStorage(JSON.parse(localStorage.getItem("user")));
     }
   }, []);
@@ -26,8 +26,8 @@ const App = (props) => {
           <Route exact path="/" component={Home} />
           <Route path="/cities" component={Cities} />
           <Route path="/city/:id" component={City} />
-          {!props.isLoggedIn && <Route path="/signin" component={SignIn} />}
-          {!props.isLoggedIn && <Route path="/signup" component={SignUp} />}
+          {!props.token && <Route path="/signin" component={SignIn} />}
+          {!props.token && <Route path="/signup" component={SignUp} />}
           <Route path="/notFound" component={NotFound404} />
           <Redirect to="/" />
         </Switch>
@@ -38,7 +38,7 @@ const App = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.user.isLoggedIn,
+    token: state.user.token,
   };
 };
 const mapDispatchToProps = {
