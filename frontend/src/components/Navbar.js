@@ -1,9 +1,12 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import userActions from "../redux/actions/userActions";
 
 const Navbar1 = (props) => {
-  console.log(props.user.isLoggedIn);
+  console.log(props);
+  console.log("consolelog de navbar");
+
   return (
     <Navbar
       className="navbar-default"
@@ -23,24 +26,14 @@ const Navbar1 = (props) => {
           <h2>MyTinerary</h2>
         </div>
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto fs-4">
-          <NavLink className="navLink" exact to="/">
-            Home
-          </NavLink>
-          <NavLink className="navLink" to="/cities">
-            Cities
-          </NavLink>
-          <NavLink className="navLink" to="/signin">
-            Sign In
-          </NavLink>
-          <NavLink className="navLink" to="/signup">
-            Sign Up
-          </NavLink>
-          <p>{props.isLoggedIn}</p>
-        </Nav>
-        <Nav>
+
+      <Nav>
+        {props.isLoggedIn ? (
+          <div className="profilePicture">
+            <img src={props.user.photoUrl} className="image--cover" />
+            <p>{props.user.name}</p>
+          </div>
+        ) : (
           <NavLink className="navLink" to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +48,33 @@ const Navbar1 = (props) => {
               />
             </svg>
           </NavLink>
+        )}
+      </Nav>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto fs-4">
+          <NavLink className="navLink" exact to="/">
+            Home
+          </NavLink>
+          <NavLink className="navLink" to="/cities">
+            Cities
+          </NavLink>
+          {!props.isLoggedIn && (
+            <NavLink className="navLink" to="/signin">
+              Sign In
+            </NavLink>
+          )}
+          {!props.isLoggedIn && (
+            <NavLink className="navLink" to="/signup">
+              Sign Up
+            </NavLink>
+          )}
+          {props.isLoggedIn && (
+            <p className="navLink signOut" onClick={() => props.signOut()}>
+              Sign Out
+            </p>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -62,8 +82,12 @@ const Navbar1 = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.isLoggedIn,
-    user: state.user,
+    isLoggedIn: state.user.isLoggedIn,
+    user: state.user.user,
   };
 };
-export default connect(mapStateToProps)(Navbar1);
+
+const mapDispatchToProps = {
+  signOut: userActions.signOut,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar1);

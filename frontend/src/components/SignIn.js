@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import userActions from "../redux/actions/userActions";
 
 const SignIn = (props) => {
+  console.log(props);
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
@@ -103,8 +104,14 @@ const SignIn = (props) => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    user: state.user.user,
+  };
+};
 const mapDispatchToProps = {
   signIn: userActions.signIn,
 };
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

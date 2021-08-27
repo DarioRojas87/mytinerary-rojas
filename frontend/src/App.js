@@ -8,8 +8,16 @@ import NotFound404 from "./pages/NotFound404";
 import City from "./pages/City";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import userActions from "./redux/actions/userActions";
 
-const App = () => {
+const App = (props) => {
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn")) {
+      props.signInLocalStorage(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
   return (
     <BrowserRouter>
       <div className="contenedor">
@@ -18,15 +26,22 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/cities" component={Cities} />
           <Route path="/city/:id" component={City} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/signup" component={SignUp} />
+          {!props.isLoggedIn && <Route path="/signin" component={SignIn} />}
+          {!props.isLoggedIn && <Route path="/signup" component={SignUp} />}
           <Route path="/notFound" component={NotFound404} />
-          <Redirect to="/notFound" />
+          <Redirect to="/" />
         </Switch>
         <Footer />
       </div>
     </BrowserRouter>
   );
 };
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+  };
+};
+const mapDispatchToProps = {
+  signInLocalStorage: userActions.signInLocalStorage,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

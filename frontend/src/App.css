@@ -41,6 +41,7 @@ div.contenidoHome {
   padding: 10px;
   z-index: 10;
   background: transparent;
+  justify-content: space-between !important;
 }
 
 .bi-person-circle {
@@ -87,6 +88,26 @@ img.logo {
 .brand h2 {
   font-size: 2.5vh;
   font-weight: 800;
+}
+
+.image--cover {
+  width: 60px;
+  margin-right: 3vh;
+  border-radius: 50%;
+  margin: 20px;
+  background-color: #ba55d3;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profilePicture {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signOut {
+  cursor: pointer;
 }
 /*FOOTER STYLES */
 
@@ -567,7 +588,7 @@ video {
   text-align: center;
   color: #fff;
   padding-top: 110px;
-  min-height: 500px;
+  min-height: 400px;
   letter-spacing: 2px;
   font-family: "Montserrat", sans-serif;
 }

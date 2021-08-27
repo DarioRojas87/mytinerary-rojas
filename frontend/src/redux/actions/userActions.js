@@ -17,7 +17,7 @@ const userActions = {
     // };
 
     return (dispatch) => {
-      axios
+      return axios
         .post("http://localhost:4000/api/user/signup", { ...newUser })
         .then((response) => {
           console.log(response);
@@ -46,12 +46,25 @@ const userActions = {
         { ...newUser }
       );
       if (respuesta.data.success) {
+        console.log(respuesta.data.response.name);
         dispatch({
           type: "SIGN_INTO_SYSTEM",
           payload: respuesta.data.response,
         });
       }
       return respuesta;
+    };
+  },
+
+  signOut: () => {
+    return (dispatch) => {
+      dispatch({ type: "SIGN_OUT" });
+    };
+  },
+
+  signInLocalStorage: (user) => {
+    return (dispatch) => {
+      dispatch({ type: "SIGN_INTO_SYSTEM", payload: user });
     };
   },
 };
