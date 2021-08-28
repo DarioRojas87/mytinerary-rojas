@@ -17,6 +17,7 @@ const App = (props) => {
     if (localStorage.getItem("token")) {
       props.signInLocalStorage(JSON.parse(localStorage.getItem("user")));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <BrowserRouter>

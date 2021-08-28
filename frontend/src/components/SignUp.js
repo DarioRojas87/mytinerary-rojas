@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { connect } from "react-redux";
@@ -32,12 +31,37 @@ const SignUp = (props) => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (Object.values(newUser).some((value) => value === "")) {
+      toast.error("All fields required, try again!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      return false;
+    }
+
     let response = await props.signUp(newUser);
-    console.log(response);
+    if (response.data.success) {
+      console.log(
+        "hay que cambiar la respuesta en el catch del action sino manejarme con el response.data.success"
+      );
+    }
+    // let response = await props.signUp(newUser);
+    // if (response.success) {
+    //   console.log("hola");
+    // }
     // if (response.data.response) {
     //LISTO PARA CATCHEAR ERRORES Y PARA DAR EL OK CON TOASTIFY
     // }
+    // setNewUser({
+    //   name: "",
+    //   lastName: "",
+    //   email: "",
+    //   password: "",
+    //   photoUrl: "",
+    //   country: "",
+    // });
   };
 
   return (
@@ -65,7 +89,6 @@ const SignUp = (props) => {
           />
           <span>Last Name</span>
           <br />
-
           <input
             required
             type="text"
@@ -86,7 +109,6 @@ const SignUp = (props) => {
           />
           <span>Email</span>
           <br />
-
           <input
             required
             type="password"
@@ -95,9 +117,8 @@ const SignUp = (props) => {
             value={newUser.password}
             onChange={inputValue}
           />
-          <span>Password</span>
+          <span>Password</span> <span> ACA VA EL ERROR</span>
           <br />
-
           <select
             required
             name="country"
@@ -111,10 +132,10 @@ const SignUp = (props) => {
               </option>
             ))}
           </select>
+          <button className="signin" onClick={handleSubmit}>
+            Sign Up
+          </button>
         </form>
-        <button className="signin" onClick={handleSubmit}>
-          Sign Up
-        </button>
       </div>
       <ToastContainer />
     </>

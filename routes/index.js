@@ -4,6 +4,8 @@ const router = express.Router();
 const citiesListControllers = require("../controllers/citiesListControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
 const userControllers = require("../controllers/userControllers");
+const passport = require("passport");
+const validator = require("../controllers/validator");
 
 router
   .route("/cities")
@@ -31,7 +33,7 @@ router
   .put(itinerariesControllers.modifyItinerary)
   .delete(itinerariesControllers.deleteItinerary);
 
-router.route("/user/signup").post(userControllers.newUser);
+router.route("/user/signup").post(validator, userControllers.newUser);
 router.route("/user/signin").post(userControllers.logUser);
 
 module.exports = router;
