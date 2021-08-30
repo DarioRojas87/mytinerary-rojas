@@ -11,6 +11,7 @@ module.exports = passport.use(
       secretOrKey: process.env.SECRETORKEY,
     },
     (payload, done) => {
+      console.log(payload);
       User.findOne({ _id: payload._doc._id })
         .then((response) => {
           if (!response) {

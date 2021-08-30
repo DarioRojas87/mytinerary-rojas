@@ -15,7 +15,7 @@ import userActions from "./redux/actions/userActions";
 const App = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      props.signInLocalStorage(JSON.parse(localStorage.getItem("user")));
+      props.signInLocalStorage(localStorage.getItem("token"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

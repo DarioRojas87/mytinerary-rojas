@@ -2,20 +2,6 @@ import axios from "axios";
 
 const userActions = {
   signUp: (newUser) => {
-    // return async (dispatch) => {
-    //   let respuesta = await axios.post(
-    //     "http://localhost:4000/api/user/signup",
-    //     { ...newUser }
-    //   );
-    //   if (respuesta.data.success) {
-    //     dispatch({
-    //       type: "SIGN_INTO_SYSTEM",
-    //       payload: respuesta.data.response,
-    //     });
-    //   }
-    //   return respuesta;
-    // };
-
     return (dispatch) => {
       return axios
         .post("http://localhost:4000/api/user/signup", { ...newUser })
@@ -26,16 +12,30 @@ const userActions = {
             console.log(response.data.response);
             dispatch({
               type: "SIGN_INTO_SYSTEM",
-              payload: response.data.response,
+              payload: {
+                token: response.data.response.token,
+                user: response.data.response,
+              },
             });
-            return response;
+            return { success: true, message: "Everything is ok" };
+          } else if (!response.data.success) {
+            console.log(response);
+
+            return {
+              success: false,
+              message: response.data.error,
+              errors: response.data.errors,
+            };
           } else {
             throw new Error();
           }
         })
-        .catch((e) => {
-          console.log("entra en catch");
-          console.log(e);
+        .catch((error) => {
+          console.log("entra en catch de signup userActions");
+          return {
+            success: false,
+            message: "Something went wrong, try again later...",
+          };
         });
     };
   },
@@ -43,13 +43,19 @@ const userActions = {
     return async (dispatch) => {
       let respuesta = await axios.post(
         "http://localhost:4000/api/user/signin",
-        { ...newUser }
+        {
+          ...newUser,
+        }
       );
       if (respuesta.data.success) {
-        console.log(respuesta.data.response.name);
+        console.log(respuesta.data.response);
+
         dispatch({
           type: "SIGN_INTO_SYSTEM",
-          payload: respuesta.data.response,
+          payload: {
+            token: respuesta.data.response.token,
+            user: respuesta.data.response,
+          },
         });
       }
       return respuesta;
@@ -62,9 +68,27 @@ const userActions = {
     };
   },
 
-  signInLocalStorage: (user) => {
+  signInLocalStorage: (token) => {
     return (dispatch) => {
-      dispatch({ type: "SIGN_INTO_SYSTEM", payload: user });
+      return axios
+        .get("http://localhost:4000/api/checkToken", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.response);
+          console.log(token);
+
+          dispatch({
+            type: "SIGN_INTO_SYSTEM",
+            payload: { token: token, user: response.data.response },
+          });
+          return response;
+        })
+        .catch((error) => {
+          return dispatch({ type: "SIGN_OUT" });
+        });
     };
   },
 };

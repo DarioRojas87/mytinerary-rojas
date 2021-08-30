@@ -44,11 +44,6 @@ div.contenidoHome {
   justify-content: space-between !important;
 }
 
-.bi-person-circle {
-  width: 4vw;
-  margin-right: 3vh;
-}
-
 img.logo {
   width: 6vw;
 }
@@ -60,9 +55,7 @@ img.logo {
   .navLink {
     margin-left: 2vw;
   }
-  .bi-person-circle {
-    width: 9vw;
-  }
+
   .brand h2 {
     display: none;
   }
@@ -91,13 +84,12 @@ img.logo {
 }
 
 .image--cover {
-  width: 60px;
-  margin-right: 3vh;
+  width: 4vw;
   border-radius: 50%;
-  margin: 20px;
   background-color: #ba55d3;
   object-fit: cover;
   object-position: center;
+  min-width: 50px;
 }
 
 .profilePicture {
@@ -105,6 +97,16 @@ img.logo {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-right: 3vw;
+  margin-left: 3vw;
+}
+
+.profilePicture p {
+  margin: 0%;
+}
+
+.bi-person-circle {
+  min-width: 50px;
 }
 .signOut {
   cursor: pointer;
@@ -899,10 +901,9 @@ video {
 .login span {
   text-transform: uppercase;
   font-size: 12px;
-
   display: inline-block;
   position: relative;
-  top: -65px;
+
   transition: all 0.5s ease-in-out;
 }
 
@@ -978,6 +979,20 @@ video {
 
 .login .signin:focus {
   outline: none;
+}
+.login button.googleButton {
+  display: flex;
+}
+.login button.googleButton span {
+  text-align: center;
+  flex: 1;
+  margin-left: 0%;
+}
+.signUp {
+  margin-top: 10vh;
+}
+.signIn {
+  margin-top: 10vh;
 }
 
 /*SIGN IN STYLES */

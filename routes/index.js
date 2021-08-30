@@ -36,4 +36,10 @@ router
 router.route("/user/signup").post(validator, userControllers.newUser);
 router.route("/user/signin").post(userControllers.logUser);
 
+router
+  .route("/checkToken")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    userControllers.checkToken
+  );
 module.exports = router;

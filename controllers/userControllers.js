@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const userControllers = {
   newUser: (req, res) => {
-    const { name, lastName, email, password, photoUrl, country } = req.body;
+    const { name, lastName, email, password, photoUrl, country, google } =
+      req.body;
     let hashedPass = bcryptjs.hashSync(password, 10);
     const newUser = new User({
       name,
@@ -13,6 +14,7 @@ const userControllers = {
       password: hashedPass,
       photoUrl,
       country,
+      google,
     });
 
     User.findOne({ email: email })
@@ -41,11 +43,21 @@ const userControllers = {
       });
   },
   logUser: (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, flagGoogle } = req.body;
     User.findOne({ email: email })
       .then((user) => {
+        if (!user && flagGoogle) {
+          throw new Error(
+            "You dont' have an account with Google, please create one first"
+          );
+        }
         if (!user) {
           throw new Error("Wrong Mail or/and Password, try again!");
+        }
+        if (user.google && !flagGoogle) {
+          throw new Error(
+            "You created an account with Google, please sign in with it"
+          );
         }
         let passMatch = bcryptjs.compareSync(password, user.password);
         if (!passMatch) {
@@ -64,10 +76,23 @@ const userControllers = {
       .catch((e) => {
         if (e.message.includes("Wrong")) {
           res.json({ success: false, dbError: false, error: e.message });
+        } else if (e.message.includes("first")) {
+          res.json({ success: false, dbError: false, error: e.message });
+        } else if (e.message.includes("Google")) {
+          console.log("entra al error flag de google");
+          res.json({ success: false, dbError: false, error: e.message });
         } else {
           res.json({ success: false, dbError: true, error: e.message });
         }
       });
+  },
+  checkToken: (req, res) => {
+    console.log("entra a controllers de checkToken");
+    console.log(req.user.name);
+    console.log(req.user.photoUrl);
+    res.json({
+      response: { name: req.user.name, photoUrl: req.user.photoUrl },
+    });
   },
 };
 

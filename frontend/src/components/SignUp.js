@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { connect } from "react-redux";
 import userActions from "../redux/actions/userActions";
+import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 
 const SignUp = (props) => {
   const [newUser, setNewUser] = useState({
@@ -10,7 +12,8 @@ const SignUp = (props) => {
     email: "",
     password: "",
     photoUrl: "",
-    country: "",
+    country: "Panama",
+    google: false,
   });
   const countrysArr = [
     "Argentina",
@@ -42,31 +45,55 @@ const SignUp = (props) => {
     }
 
     let response = await props.signUp(newUser);
-    if (response.data.success) {
-      console.log(
-        "hay que cambiar la respuesta en el catch del action sino manejarme con el response.data.success"
-      );
+    if (response.success) {
+    } else if (response.errors) {
+      response.errors.map((error) => {
+        return toast.error(`${error.message}`, {
+          position: "top-center",
+          autoClose: false,
+        });
+      });
+    } else {
+      toast.error(`${response.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      setNewUser({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+        photoUrl: "",
+        country: "",
+        google: false,
+      });
     }
-    // let response = await props.signUp(newUser);
-    // if (response.success) {
-    //   console.log("hola");
-    // }
-    // if (response.data.response) {
-    //LISTO PARA CATCHEAR ERRORES Y PARA DAR EL OK CON TOASTIFY
-    // }
-    // setNewUser({
-    //   name: "",
-    //   lastName: "",
-    //   email: "",
-    //   password: "",
-    //   photoUrl: "",
-    //   country: "",
-    // });
+  };
+
+  const responseGoogle = async (res) => {
+    let newGoogleUser = {
+      name: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+      photoUrl: res.profileObj.imageUrl,
+      country: "Argentina",
+      google: true,
+    };
+
+    let response = await props.signUp(newGoogleUser);
+    if (response.success) {
+    } else {
+      toast.error(`${response.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
   };
 
   return (
     <>
-      <div className="login">
+      <div className="login signUp">
         <h2 className="active"> sign up </h2>
         <form>
           <input
@@ -117,7 +144,7 @@ const SignUp = (props) => {
             value={newUser.password}
             onChange={inputValue}
           />
-          <span>Password</span> <span> ACA VA EL ERROR</span>
+          <span>Password</span>
           <br />
           <select
             required
@@ -135,7 +162,18 @@ const SignUp = (props) => {
           <button className="signin" onClick={handleSubmit}>
             Sign Up
           </button>
+          <GoogleLogin
+            clientId="282259074384-ulqapk8gcj71sf3oald9uej24m3liule.apps.googleusercontent.com"
+            buttonText="Sign Up with Google Account"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+            className="googleButton signin"
+          />
         </form>
+        <p>
+          Already have account? Please Sign In <Link to="/signin">HERE</Link>
+        </p>
       </div>
       <ToastContainer />
     </>
@@ -147,32 +185,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(SignUp);
-
-// axios
-//   .post("http://localhost:4000/api/user/signup", { ...newUser })
-//   .then((res) => {
-//     if (res.data.success) {
-//       toast.success("Congratulations! now you have an user account", {
-//         position: "top-center",
-//         autoClose: 3000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//         progress: undefined,
-//       });
-//     } else {
-//       toast.error("There is another user with that mail. Try again!", {
-//         position: "top-center",
-//         autoClose: 3000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//         progress: undefined,
-//       });
-//     }
-//   })
-//   .catch((e) => {
-//     alert("Algo salio mal con el backend");
-//   });
