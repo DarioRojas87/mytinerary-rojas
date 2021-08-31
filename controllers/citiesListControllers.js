@@ -3,11 +3,9 @@ const City = require("../models/City");
 const citiesListControllers = {
   //le pido al modelo que me busque en la BD todos los invitados y los almaceno en la variable cities
   getCities: (req, res) => {
-    console.log("Fetcheo ciudades desde base de datos");
     City.find()
       .then((cities) => {
         if (cities.length > 0) {
-          console.log("entra al if");
           res.json({ success: true, response: cities });
         } else {
           throw new Error();
@@ -33,7 +31,6 @@ const citiesListControllers = {
     City.findOne({ _id: req.params.id })
       .then((city) => {
         if (city) {
-          console.log("Obtengo una unica ciudad");
           res.json({ success: true, response: city });
         } else {
           throw new Error();

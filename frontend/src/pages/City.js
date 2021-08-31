@@ -9,6 +9,7 @@ import Itinerary from "../components/Itinerary";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const City = (props) => {
+  console.log(props);
   const [city, setCity] = useState({});
 
   useEffect(() => {
@@ -37,7 +38,6 @@ const City = (props) => {
     async function getItineraries() {
       let response = await props.getItineraries(props.match.params.id);
       if (response && response.error) {
-        console.log(response.error);
       }
     }
     getItineraries();
@@ -91,67 +91,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(City);
-
-// axios
-//   .get(`http://localhost:4000/api/city/${props.match.params.id}`)
-//   .then((res) => {
-//     if (res.data.success) {
-//       setCity(res.data.response);
-//     } else {
-//       throw new Error();
-//     }
-//   })
-//   .catch((err) => {
-//     toast.error("Something went wrong! Redirecting to Cities", {
-//       position: "top-right",
-//       autoClose: 5000,
-//       hideProgressBar: false,
-//       closeOnClick: true,
-//       pauseOnHover: true,
-//       draggable: true,
-//       progress: undefined,
-//     });
-//     setTimeout(() => {
-//       props.history.push("/cities");
-//     }, 5000);
-//     return () => clearTimeout;
-//   });
-
-// useEffect(() => {
-//   axios
-//     .get("http://localhost:4000/api/itineraries")
-//     .then((res) => {
-//       if (res.data.success) {
-//         setItineraries(res.data.response);
-//       } else {
-//         throw new Error();
-//       }
-//     })
-//     .catch((err) => {
-//       toast.error("Something went wrong! Redirecting to Cities", {
-//         position: "top-right",
-//         autoClose: 5000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//         progress: undefined,
-//       });
-//       setTimeout(() => {
-//         props.history.push("/cities");
-//       }, 5000);
-//       return () => clearTimeout;
-//     });
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, []);
-
-// async function getItinerarios() {
-//   try {
-//     await props.getItineraries(props.match.params.id);
-//     console.log(props.itinerariesList);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-// getItinerarios();
-// props.getItinerariesList();

@@ -6,10 +6,7 @@ const userActions = {
       return axios
         .post("http://localhost:4000/api/user/signup", { ...newUser })
         .then((response) => {
-          console.log(response);
           if (response.data.success) {
-            console.log("cayo en if que setea el data para dispatch");
-            console.log(response.data.response);
             dispatch({
               type: "SIGN_INTO_SYSTEM",
               payload: {
@@ -19,8 +16,6 @@ const userActions = {
             });
             return { success: true, message: "Everything is ok" };
           } else if (!response.data.success) {
-            console.log(response);
-
             return {
               success: false,
               message: response.data.error,
@@ -31,7 +26,6 @@ const userActions = {
           }
         })
         .catch((error) => {
-          console.log("entra en catch de signup userActions");
           return {
             success: false,
             message: "Something went wrong, try again later...",
@@ -48,8 +42,6 @@ const userActions = {
         }
       );
       if (respuesta.data.success) {
-        console.log(respuesta.data.response);
-
         dispatch({
           type: "SIGN_INTO_SYSTEM",
           payload: {
@@ -77,9 +69,6 @@ const userActions = {
           },
         })
         .then((response) => {
-          console.log(response.data.response);
-          console.log(token);
-
           dispatch({
             type: "SIGN_INTO_SYSTEM",
             payload: { token: token, user: response.data.response },

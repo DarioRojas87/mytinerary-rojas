@@ -43,7 +43,6 @@ const SignUp = (props) => {
       });
       return false;
     }
-
     let response = await props.signUp(newUser);
     if (response.success) {
     } else if (response.errors) {
@@ -64,7 +63,7 @@ const SignUp = (props) => {
         email: "",
         password: "",
         photoUrl: "",
-        country: "",
+        country: "Panama",
         google: false,
       });
     }
@@ -146,6 +145,7 @@ const SignUp = (props) => {
           />
           <span>Password</span>
           <br />
+          <span>Country</span>
           <select
             required
             name="country"
@@ -159,6 +159,7 @@ const SignUp = (props) => {
               </option>
             ))}
           </select>
+
           <button className="signin" onClick={handleSubmit}>
             Sign Up
           </button>

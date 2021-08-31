@@ -23,7 +23,6 @@ const userControllers = {
           throw new Error("There is another user with that mail. Try again!");
         } else {
           newUser.save().then(() => {
-            console.log("nuevo usuario creado");
             const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY);
             res.json({
               success: true,
@@ -38,7 +37,6 @@ const userControllers = {
         }
       })
       .catch((e) => {
-        console.log("cayo en catch de crear nuevo usuario");
         res.json({ success: false, response: null, error: e.message });
       });
   },
@@ -79,7 +77,6 @@ const userControllers = {
         } else if (e.message.includes("first")) {
           res.json({ success: false, dbError: false, error: e.message });
         } else if (e.message.includes("Google")) {
-          console.log("entra al error flag de google");
           res.json({ success: false, dbError: false, error: e.message });
         } else {
           res.json({ success: false, dbError: true, error: e.message });
@@ -87,9 +84,6 @@ const userControllers = {
       });
   },
   checkToken: (req, res) => {
-    console.log("entra a controllers de checkToken");
-    console.log(req.user.name);
-    console.log(req.user.photoUrl);
     res.json({
       response: { name: req.user.name, photoUrl: req.user.photoUrl },
     });

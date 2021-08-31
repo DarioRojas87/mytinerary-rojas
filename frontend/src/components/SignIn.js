@@ -102,7 +102,7 @@ const SignIn = (props) => {
           className="googleButton signin"
         />
         <p>
-          You still do not have an account? Create one here{" "}
+          You still do not have an account? Create one{" "}
           <Link to="/signup">HERE</Link>
         </p>
       </div>

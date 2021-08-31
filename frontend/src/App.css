@@ -764,8 +764,11 @@ video {
 }
 /*ITINERARY STYLES*/
 .card-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin-top: 5vh;
-  width: 70%;
+  width: 70vw;
   min-height: 420px;
   height: auto;
   background: rgba(132, 88, 179, 0.7);
@@ -774,7 +777,6 @@ video {
   -webkit-backdrop-filter: blur(11px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-
   overflow: visible;
   display: flex;
   justify-content: center;
@@ -811,11 +813,16 @@ video {
   height: 100%;
   margin-top: 30px;
 }
+.card-box-text-itinerary h3 {
+  font-size: 3vw;
+  -webkit-text-stroke: 0.1px;
+}
 .itinerary-title {
   font-family: "Montserrat Subrayada", sans-serif;
   font-weight: 700;
   text-align: start;
   margin-bottom: 30px;
+  font-size: 3.5vw;
 }
 
 .features {
@@ -829,8 +836,12 @@ video {
   display: flex;
   align-items: center;
 }
+.author h2 {
+  font-size: 3vw;
+  -webkit-text-stroke: 0.1px;
+}
 .image {
-  width: 80px;
+  width: 9vw;
   height: auto;
   border-radius: 50%;
   border-color: #363635;
@@ -860,6 +871,15 @@ video {
 
 .itineraryBody h2 {
   color: black;
+}
+
+.activitiesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.itineraryBody {
+  width: 100%;
 }
 
 /*SIGN UP PAGE*/
@@ -969,6 +989,7 @@ video {
   border: none;
   text-transform: uppercase;
   align-self: flex-end;
+  font-size: 1.6vw;
 }
 
 .login .signin:hover {
@@ -987,6 +1008,7 @@ video {
   text-align: center;
   flex: 1;
   margin-left: 0%;
+  font-size: 1.5vw;
 }
 .signUp {
   margin-top: 10vh;
@@ -994,5 +1016,21 @@ video {
 .signIn {
   margin-top: 10vh;
 }
+.login select {
+  margin-left: 3vw;
+}
 
-/*SIGN IN STYLES */
+/*ACTIVITIES STYLES*/
+h3.activitiesLabel {
+  font-size: 3vw;
+  -webkit-text-stroke: 0.1px;
+}
+.activitiesCarousel .carousel-control-next-icon {
+  width: 3vw;
+}
+.activitiesCarousel .carousel-control-prev-icon {
+  width: 3vw;
+}
+.activitiesCarousel .carousel-indicators {
+  display: none !important;
+}

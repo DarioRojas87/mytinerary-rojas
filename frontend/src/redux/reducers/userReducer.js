@@ -9,7 +9,6 @@ const userReducer = (state = { token: null, user: {} }, action) => {
         user: action.payload.user,
       };
     case "SIGN_OUT":
-      console.log("se ejecuta SIGN");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       return {

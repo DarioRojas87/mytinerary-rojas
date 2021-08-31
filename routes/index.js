@@ -4,6 +4,7 @@ const router = express.Router();
 const citiesListControllers = require("../controllers/citiesListControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
 const userControllers = require("../controllers/userControllers");
+const activitiesControllers = require("../controllers/activitiesControllers");
 const passport = require("passport");
 const validator = require("../controllers/validator");
 
@@ -42,4 +43,10 @@ router
     passport.authenticate("jwt", { session: false }),
     userControllers.checkToken
   );
+
+router.route("/activities").post(activitiesControllers.uploadNewActivity);
+
+router
+  .route("/activities/:itinerary")
+  .get(activitiesControllers.getActivitiesByItinerary);
 module.exports = router;

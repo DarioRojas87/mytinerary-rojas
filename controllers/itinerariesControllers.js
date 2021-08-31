@@ -6,7 +6,6 @@ const itinerariesControllers = {
       .populate("cityId")
       .then((itineraries) => {
         if (itineraries.length > 0) {
-          console.log("entra al if");
           res.json({ success: true, response: itineraries });
         } else {
           throw new Error();
@@ -38,7 +37,6 @@ const itinerariesControllers = {
       .populate("cityId")
       .then((itineraries) => {
         if (itineraries.length > 0) {
-          console.log("entra al if de getItineraries By City");
           res.json({ success: true, response: itineraries });
         } else {
           throw new Error();
@@ -50,7 +48,6 @@ const itinerariesControllers = {
     Itinerary.findOne({ _id: req.params.id })
       .then((itinerary) => {
         if (itinerary) {
-          console.log("Obtengo un itinerario unico");
           res.json({ success: true, response: itinerary });
         } else {
           throw new Error();
