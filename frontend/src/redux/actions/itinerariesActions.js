@@ -28,6 +28,21 @@ const itinerariesAction = {
       dispatch({ type: "CLEAN_ITINERARIES" });
     };
   },
+  getActivitiesByItinerary: (itinerary) => {
+    return async (dispatch) => {
+      try {
+        let response = await axios.get(
+          `http://localhost:4000/api/activities/${itinerary}`
+        );
+        let data = response.data.response;
+        dispatch({ type: "GET_ACTIVITIES_BY_ITINERARY", payload: data });
+        console.log(data);
+        return { success: true, activities: data };
+      } catch (err) {
+        return { success: false, error: err };
+      }
+    };
+  },
 };
 
 export default itinerariesAction;

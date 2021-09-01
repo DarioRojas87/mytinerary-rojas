@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import Activities from "./Activities";
+import itinerariesActions from "../redux/actions/itinerariesActions";
+import Comments from "./Comments";
 
 const Itinerary = (props) => {
-  console.log(props);
   const [collapse, setCollapse] = useState(false);
   const [status, setStatus] = useState("View More");
+  const [activitiesToRender, setActivitiesToRender] = useState([]);
 
   const onEntering = () => setStatus("Opening...");
 
@@ -15,8 +18,24 @@ const Itinerary = (props) => {
 
   const onExited = () => setStatus("View More");
 
-  const toggle = () => setCollapse(!collapse);
+  const toggle = () => {
+    setCollapse(!collapse);
 
+    if (collapse === false) {
+      console.log("entra a if que ejecuta action");
+      async function getActivities() {
+        console.log("collaps");
+
+        let response = await props.getActivities(props.itinerary._id);
+        console.log(response);
+        setActivitiesToRender(response.activities);
+      }
+      getActivities();
+    }
+
+    // props.cleanActivities();
+  };
+  console.log(activitiesToRender);
   let priceArray = [1, 2, 3, 4, 5];
 
   return (
@@ -68,7 +87,8 @@ const Itinerary = (props) => {
             }}
           >
             <CardBody className="itineraryBody">
-              <Activities />
+              <Activities activities={activitiesToRender} />
+              <Comments />
             </CardBody>
           </Card>
         </Collapse>
@@ -83,5 +103,27 @@ const Itinerary = (props) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {};
+};
 
-export default Itinerary;
+const mapDispatchToProps = {
+  getActivities: itinerariesActions.getActivitiesByItinerary,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
+
+// setCollapse(!collapse);
+
+// if (collapse === false && props.activities.length) {
+//   console.log("hola");
+// }
+// async function getActivities() {
+//   console.log("collaps");
+
+//   let response = await props.getActivities(props.itinerary._id);
+//   console.log(response);
+//   setActivitiesToRender(response.activities);
+// }
+// getActivities();
+// props.cleanActivities();

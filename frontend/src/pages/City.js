@@ -9,7 +9,6 @@ import Itinerary from "../components/Itinerary";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const City = (props) => {
-  console.log(props);
   const [city, setCity] = useState({});
 
   useEffect(() => {

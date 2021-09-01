@@ -584,13 +584,12 @@ video {
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-
   background-size: cover;
   background-position-y: -200px, center;
   text-align: center;
   color: #fff;
   padding-top: 110px;
-  min-height: 400px;
+  min-height: 600px;
   letter-spacing: 2px;
   font-family: "Montserrat", sans-serif;
 }
@@ -779,7 +778,6 @@ video {
   border: 1px solid rgba(255, 255, 255, 0.18);
   overflow: visible;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 .card-box {
@@ -932,7 +930,7 @@ video {
   width: 89%;
   padding: 10px 20px;
   display: block;
-  height: 15px;
+  height: 30px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0);
@@ -982,7 +980,7 @@ video {
   width: 100%;
   padding: 10px 20px;
   display: block;
-  height: 39px;
+  height: 50px;
   border-radius: 20px;
   margin-top: 30px;
   transition: all 0.5s ease-in-out;
@@ -1033,4 +1031,104 @@ h3.activitiesLabel {
 }
 .activitiesCarousel .carousel-indicators {
   display: none !important;
+}
+
+.slideActivities {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .slideActivities {
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/*COMMENTS SECTION*/
+.comment-section {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.comment-section .image-holder {
+  float: left;
+  margin-right: 15px;
+}
+
+.comment-section .image-holder img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+
+  object-fit: cover;
+}
+
+.comment-section .comment-desc {
+  height: 1%;
+  overflow: hidden;
+}
+
+.comment-section .comment-desc .user-desv .userlinks {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: top;
+  margin-bottom: 5px;
+}
+
+.comment-section .comment-desc .user-desv .user-name {
+  font-size: 14px;
+  color: #545454;
+}
+
+.comment-section .comment-desc .user-desv a {
+  color: #f7931d;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.comment-section .comment-desc .user-desv .muted-txt {
+  color: #bfc1c3;
+  font-size: 13px;
+}
+
+.comment-section .comment-desc .likes-sec {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.comment-section .comment-desc .likes-sec img {
+  width: 15px;
+  height: 15px;
+  vertical-align: top;
+}
+
+.comment-section .comment-desc .likes-sec i {
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.comment-section .comment-desc .questions {
+  font-size: 22px;
+  color: #545454;
+  margin-top: 5px;
+}
+
+.comments-section {
+  background-color: white;
+  /* padding: 2vh 2vw; */
 }
