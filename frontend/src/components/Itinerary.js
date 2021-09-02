@@ -4,6 +4,7 @@ import { Collapse, Button, CardBody, Card } from "reactstrap";
 import Activities from "./Activities";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 import Comments from "./Comments";
+import Form from "react-bootstrap/Form";
 
 const Itinerary = (props) => {
   const [collapse, setCollapse] = useState(false);
@@ -89,6 +90,17 @@ const Itinerary = (props) => {
             <CardBody className="itineraryBody">
               <Activities activities={activitiesToRender} />
               <Comments />
+
+              <Form>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Label>Please leave a comment!</Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                </Form.Group>
+              </Form>
+              <Button variant="outline-secondary">Submit</Button>
             </CardBody>
           </Card>
         </Collapse>

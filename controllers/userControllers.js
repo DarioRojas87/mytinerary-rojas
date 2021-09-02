@@ -67,6 +67,7 @@ const userControllers = {
           response: {
             name: user.name,
             photoUrl: user.photoUrl,
+
             token,
           },
         });
