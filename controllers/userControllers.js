@@ -29,6 +29,7 @@ const userControllers = {
               response: {
                 name: newUser.name,
                 photoUrl: newUser.photoUrl,
+                id: newUser._id,
                 token,
               },
               error: null,
@@ -67,7 +68,7 @@ const userControllers = {
           response: {
             name: user.name,
             photoUrl: user.photoUrl,
-
+            id: user._id,
             token,
           },
         });

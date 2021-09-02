@@ -42,6 +42,7 @@ const userActions = {
         }
       );
       if (respuesta.data.success) {
+        console.log(respuesta);
         dispatch({
           type: "SIGN_INTO_SYSTEM",
           payload: {
