@@ -36,10 +36,29 @@ const itinerariesAction = {
         );
         let data = response.data.response;
         dispatch({ type: "GET_ACTIVITIES_BY_ITINERARY", payload: data });
-        console.log(data);
+
         return { success: true, activities: data };
       } catch (err) {
         return { success: false, error: err };
+      }
+    };
+  },
+  addNewComment: (newComment, itineraryId) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.post(
+          `http://localhost:4000/api/comments/${itineraryId}`,
+          { newComment },
+          {
+            headers: {
+              Authorization: "Bearer " + newComment.token,
+            },
+          }
+        );
+
+        return response.data;
+      } catch (error) {
+        return { response: { success: false } };
       }
     };
   },

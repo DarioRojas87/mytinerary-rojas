@@ -5,11 +5,36 @@ import Activities from "./Activities";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 import Comments from "./Comments";
 import Form from "react-bootstrap/Form";
+import { ToastContainer, toast } from "react-toastify";
 
 const Itinerary = (props) => {
   const [collapse, setCollapse] = useState(false);
   const [status, setStatus] = useState("View More");
   const [activitiesToRender, setActivitiesToRender] = useState([]);
+  const [newComment, setNewComment] = useState({
+    userId: "",
+    comment: "",
+    userPhoto: "",
+    name: "",
+    token: "",
+    date: "",
+  });
+
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
+  const inputValue = (e) => {
+    setNewComment({
+      userId: props.user.id,
+      comment: e.target.value,
+      userPhoto: props.user.photoUrl,
+      name: props.user.name,
+      token: localStorage.getItem("token"),
+      date: date,
+    });
+  };
 
   const onEntering = () => setStatus("Opening...");
 
@@ -23,21 +48,59 @@ const Itinerary = (props) => {
     setCollapse(!collapse);
 
     if (collapse === false) {
-      console.log("entra a if que ejecuta action");
       async function getActivities() {
-        console.log("collaps");
-
         let response = await props.getActivities(props.itinerary._id);
-        console.log(response);
         setActivitiesToRender(response.activities);
       }
       getActivities();
     }
-
-    // props.cleanActivities();
   };
-  console.log(activitiesToRender);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (Object.values(newComment).some((value) => value === "")) {
+      toast.error("You can't submit an empty comment!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      return false;
+    }
+    let response = await props.addNewComment(newComment, props.itinerary._id);
+
+    if (response.success) {
+      async function getItineraries() {
+        let response = await props.getItineraries(props.itinerary.cityId._id);
+        if (response && response.error) {
+        }
+      }
+      getItineraries();
+      toast.success(`Your comment was published!`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setNewComment({
+        userId: "",
+        comment: "",
+        userPhoto: "",
+        name: "",
+        token: "",
+      });
+    } else {
+      toast.error(`You need to be logged in to submit a comment!`, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
+  };
+
   let priceArray = [1, 2, 3, 4, 5];
+
+  const tokenExist = localStorage.getItem("token");
 
   return (
     <div className="card-box-container">
@@ -89,7 +152,7 @@ const Itinerary = (props) => {
           >
             <CardBody className="itineraryBody">
               <Activities activities={activitiesToRender} />
-              <Comments />
+              <Comments comments={props.itinerary.comments} />
 
               <Form>
                 <Form.Group
@@ -97,10 +160,38 @@ const Itinerary = (props) => {
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Please leave a comment!</Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  {tokenExist ? (
+                    <Form.Control
+                      onChange={inputValue}
+                      as="textarea"
+                      rows={3}
+                      value={newComment.comment}
+                    />
+                  ) : (
+                    <Form.Control
+                      onChange={inputValue}
+                      as="textarea"
+                      rows={3}
+                      value="YOU MUST SIGN IN BEFORE SUBMIT NEW COMMENTS"
+                      disabled
+                    />
+                  )}
                 </Form.Group>
               </Form>
-              <Button variant="outline-secondary">Submit</Button>
+
+              {tokenExist ? (
+                <Button onClick={handleSubmit} variant="outline-secondary">
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleSubmit}
+                  variant="outline-secondary"
+                  disabled
+                >
+                  Submit
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Collapse>
@@ -116,26 +207,15 @@ const Itinerary = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.user.user,
+  };
 };
 
 const mapDispatchToProps = {
   getActivities: itinerariesActions.getActivitiesByItinerary,
+  addNewComment: itinerariesActions.addNewComment,
+  getItineraries: itinerariesActions.getItinerariesByCity,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
-
-// setCollapse(!collapse);
-
-// if (collapse === false && props.activities.length) {
-//   console.log("hola");
-// }
-// async function getActivities() {
-//   console.log("collaps");
-
-//   let response = await props.getActivities(props.itinerary._id);
-//   console.log(response);
-//   setActivitiesToRender(response.activities);
-// }
-// getActivities();
-// props.cleanActivities();

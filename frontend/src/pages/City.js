@@ -20,17 +20,7 @@ const City = (props) => {
     if (found) {
       setCity(found);
     } else {
-      toast.error("Something went wrong! Redirecting to Cities", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        onClose: () => props.history.push("/cities"),
-      });
-
+      props.history.push("/cities");
       return () => props.cleanItineraries();
     }
 
@@ -67,8 +57,11 @@ const City = (props) => {
             />
           </>
         )}
-
-        <Link to="/cities">Go Back to Cities</Link>
+        <button className="btnHome">
+          <span>
+            <Link to="/cities">Go Back to Cities</Link>
+          </span>
+        </button>
 
         <ToastContainer />
       </div>

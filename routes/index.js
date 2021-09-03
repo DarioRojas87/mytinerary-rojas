@@ -5,6 +5,7 @@ const citiesListControllers = require("../controllers/citiesListControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
 const userControllers = require("../controllers/userControllers");
 const activitiesControllers = require("../controllers/activitiesControllers");
+const commentsControllers = require("../controllers/commentsControllers");
 const passport = require("passport");
 const validator = require("../controllers/validator");
 
@@ -49,4 +50,13 @@ router.route("/activities").post(activitiesControllers.uploadNewActivity);
 router
   .route("/activities/:itinerary")
   .get(activitiesControllers.getActivitiesByItinerary);
+
+router
+  .route("/comments/:itinerary")
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    commentsControllers.newComment
+  )
+
+  .delete(commentsControllers.deleteComment);
 module.exports = router;

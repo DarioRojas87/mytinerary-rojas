@@ -87,7 +87,11 @@ const userControllers = {
   },
   checkToken: (req, res) => {
     res.json({
-      response: { name: req.user.name, photoUrl: req.user.photoUrl },
+      response: {
+        name: req.user.name,
+        photoUrl: req.user.photoUrl,
+        id: req.user._id,
+      },
     });
   },
 };

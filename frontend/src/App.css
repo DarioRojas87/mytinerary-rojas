@@ -219,6 +219,13 @@ img.logo {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.carouselCities .carousel-control-next {
+  justify-content: flex-end !important;
+}
+.carouselCities .carousel-control-prev {
+  justify-content: flex-start !important;
+}
+
 .slidePadre {
   width: 80vw;
   height: 80vh;
@@ -295,7 +302,10 @@ img.logo {
   position: relative;
   z-index: 1;
 }
-
+.btnHome span a {
+  text-decoration: none;
+  color: white;
+}
 .btnHome:after {
   content: "";
   position: absolute;
@@ -780,6 +790,11 @@ video {
   display: flex;
   align-items: center;
 }
+@media only screen and (max-width: 950px) {
+  .card-box-container {
+    width: 90vw;
+  }
+}
 .card-box {
   width: 100%;
   height: 100%;
@@ -1022,6 +1037,11 @@ video {
 h3.activitiesLabel {
   font-size: 3vw;
   -webkit-text-stroke: 0.1px;
+  background: rgba(132, 88, 179, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border-radius: 10px;
 }
 .activitiesCarousel .carousel-control-next-icon {
   width: 3vw;
@@ -1088,7 +1108,7 @@ h3.activitiesLabel {
 
 .comment-section .comment-desc .user-desv .user-name {
   font-size: 14px;
-  color: #545454;
+  color: black;
 }
 
 .comment-section .comment-desc .user-desv a {
@@ -1098,7 +1118,7 @@ h3.activitiesLabel {
 }
 
 .comment-section .comment-desc .user-desv .muted-txt {
-  color: #bfc1c3;
+  color: black;
   font-size: 13px;
 }
 
@@ -1124,15 +1144,25 @@ h3.activitiesLabel {
 
 .comment-section .comment-desc .questions {
   font-size: 22px;
-  color: #545454;
+  color: black;
   margin-top: 5px;
 }
 
 .comments-section {
-  background-color: white;
+  background-color: #d0bdf4;
   /* padding: 2vh 2vw; */
 }
 
 .form-control {
-  background-color: #1161ed !important;
+  background-color: #d0bdf4 !important;
+}
+label.form-label {
+  color: black !important;
+  font-size: 1.5vw;
+}
+
+@media only screen and (max-width: 950px) {
+  label.form-label {
+    font-size: 3vw;
+  }
 }

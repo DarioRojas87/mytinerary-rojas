@@ -1,6 +1,7 @@
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <div className="footer">
       <div id="button"></div>
@@ -9,16 +10,31 @@ const Footer = () => {
           <NavLink className="navLink " exact to="/">
             Home
           </NavLink>
-          <div className="d-flex">
-            <h1>MyTinerary</h1>
-          </div>
           <NavLink className="navLink" to="/cities">
             Cities
           </NavLink>
+          <div className="d-flex">
+            <h1>MyTinerary</h1>
+          </div>
+          {!props.token && (
+            <NavLink className="navLink" to="/signin">
+              Sign In
+            </NavLink>
+          )}
+          {!props.token && (
+            <NavLink className="navLink" to="/signup">
+              Sign Up
+            </NavLink>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
-export default Footer;
+const mapStateToProps = (state) => {
+  return {
+    token: state.user.token,
+    user: state.user.user,
+  };
+};
+export default connect(mapStateToProps)(Footer);

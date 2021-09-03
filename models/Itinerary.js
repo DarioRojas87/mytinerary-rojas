@@ -12,7 +12,16 @@ const itinerarySchema = new mongoose.Schema({
   likes: { type: Number, default: 0 },
   hashtags: { type: Array, required: true },
   cardPhoto: { type: String, required: true },
-  comments: { type: Array },
+  comments: [
+    {
+      userId: { type: String },
+      comment: { type: String },
+      userPhoto: { type: String },
+      name: { type: String },
+      token: { type: String },
+      date: { type: String },
+    },
+  ],
   cityId: { type: mongoose.Types.ObjectId, ref: "city" },
 });
 const Itinerary = mongoose.model("itinerary", itinerarySchema);
