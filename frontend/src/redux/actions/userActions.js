@@ -4,7 +4,9 @@ const userActions = {
   signUp: (newUser) => {
     return (dispatch) => {
       return axios
-        .post("http://localhost:4000/api/user/signup", { ...newUser })
+        .post("https://mytinerary-rojas.herokuapp.com/api/user/signup", {
+          ...newUser,
+        })
         .then((response) => {
           if (response.data.success) {
             dispatch({
@@ -36,7 +38,7 @@ const userActions = {
   signIn: (newUser) => {
     return async (dispatch) => {
       let respuesta = await axios.post(
-        "http://localhost:4000/api/user/signin",
+        "https://mytinerary-rojas.herokuapp.com/api/user/signin",
         {
           ...newUser,
         }
@@ -63,7 +65,7 @@ const userActions = {
   signInLocalStorage: (token) => {
     return (dispatch) => {
       return axios
-        .get("http://localhost:4000/api/checkToken", {
+        .get("https://mytinerary-rojas.herokuapp.com/api/checkToken", {
           headers: {
             Authorization: "Bearer " + token,
           },

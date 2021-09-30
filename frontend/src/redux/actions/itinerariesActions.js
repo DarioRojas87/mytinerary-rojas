@@ -5,7 +5,7 @@ const itinerariesAction = {
     return async (dispatch) => {
       try {
         let response = await axios.get(
-          `http://localhost:4000/api/itineraries/${city}`
+          `https://mytinerary-rojas.herokuapp.com/api/itineraries/${city}`
         );
         let data = response.data.response;
         dispatch({ type: "GET_ITINERARY_BY_CITY", payload: data });
@@ -17,10 +17,12 @@ const itinerariesAction = {
   },
   getAllItineraries: () => {
     return (dispatch) => {
-      axios.get(`http://localhost:4000/api/itineraries`).then((response) => {
-        let data = response.data.response;
-        dispatch({ type: "GET_ALL_ITINERARIES", payload: data });
-      });
+      axios
+        .get(`https://mytinerary-rojas.herokuapp.com/api/itineraries`)
+        .then((response) => {
+          let data = response.data.response;
+          dispatch({ type: "GET_ALL_ITINERARIES", payload: data });
+        });
     };
   },
   cleanUpItineraries: () => {
@@ -32,7 +34,7 @@ const itinerariesAction = {
     return async (dispatch) => {
       try {
         let response = await axios.get(
-          `http://localhost:4000/api/activities/${itinerary}`
+          `https://mytinerary-rojas.herokuapp.com/api/activities/${itinerary}`
         );
         let data = response.data.response;
         dispatch({ type: "GET_ACTIVITIES_BY_ITINERARY", payload: data });
@@ -47,7 +49,7 @@ const itinerariesAction = {
     return async (dispatch) => {
       try {
         const response = await axios.post(
-          `http://localhost:4000/api/comments/${itineraryId}`,
+          `https://mytinerary-rojas.herokuapp.com/api/comments/${itineraryId}`,
           { newComment },
           {
             headers: {

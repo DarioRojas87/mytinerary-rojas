@@ -5,7 +5,9 @@ const citiesActions = {
     //action creator
     return async (dispatch) => {
       try {
-        let response = await axios.get("http://localhost:4000/api/cities");
+        let response = await axios.get(
+          "https://mytinerary-rojas.herokuapp.com/api/cities"
+        );
         let data = response.data.response;
         dispatch({ type: "GET_ALL_CITIES", payload: data });
         return { success: true };
